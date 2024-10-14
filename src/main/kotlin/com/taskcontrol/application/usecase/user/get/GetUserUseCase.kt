@@ -7,6 +7,6 @@ import org.springframework.stereotype.Service
 @Service
 class GetUserUseCase(
     private val userRepository: IUserRepository
-): IGetUserUseCase {
+) : IGetUserUseCase {
     override fun getAllUsers(): List<User> = userRepository.findAll()
 }

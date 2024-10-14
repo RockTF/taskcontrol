@@ -1,5 +1,6 @@
 package com.taskcontrol.application.port
 
+import com.taskcontrol.application.model.Status
 import com.taskcontrol.application.model.Task
 import java.util.UUID
 
@@ -8,4 +9,5 @@ interface ITaskRepository {
     fun findAll(): List<Task>
     fun deleteById(id: UUID)
     fun findAllByUserId(userId: UUID): List<Task>
+    fun findAllByUserIdAndStatus(userId: UUID, status: Status): List<Task>
 }

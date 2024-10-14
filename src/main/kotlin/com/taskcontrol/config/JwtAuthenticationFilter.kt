@@ -5,15 +5,15 @@ import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.slf4j.LoggerFactory
-import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.authority.SimpleGrantedAuthority
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource
 import org.springframework.web.filter.OncePerRequestFilter
 import java.security.SignatureException
-import java.util.*
+import java.util.Date
 
 class JwtAuthenticationFilter : OncePerRequestFilter() {
 
@@ -28,7 +28,9 @@ class JwtAuthenticationFilter : OncePerRequestFilter() {
         if (token != null && validateToken(token)) {
             val userDetails = getUserDetailsFromToken(token)
             val authentication = UsernamePasswordAuthenticationToken(
-                userDetails, null, userDetails.authorities
+                userDetails,
+                null,
+                userDetails.authorities
             )
             authentication.details = WebAuthenticationDetailsSource().buildDetails(request)
             SecurityContextHolder.getContext().authentication = authentication
@@ -39,22 +41,19 @@ class JwtAuthenticationFilter : OncePerRequestFilter() {
 
     private fun validateToken(token: String): Boolean {
         try {
-            val secretKey = "YourSecretKey"  // This should be secured and externalized
+            val secretKey = "YourSecretKey"
 
             Jwts.parserBuilder()
                 .setSigningKey(secretKey.toByteArray())
                 .build()
                 .parseClaimsJws(token)
                 .body.apply {
-                    // Optionally, validate the issuer or expiration here if needed
                     return !isTokenExpired(this.expiration)
                 }
         } catch (e: SignatureException) {
-            // Correctly log the exception along with the message
             logger.error("JWT signature validation failed: ${e.message}", e)
             return false
         } catch (e: Exception) {
-            // Handle other exceptions such as malformed token exceptions here
             logger.error("Error parsing JWT: ${e.message}", e)
             return false
         }

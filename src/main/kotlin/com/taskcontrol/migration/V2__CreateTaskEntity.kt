@@ -11,7 +11,8 @@ class V2__CreateTaskEntity : BaseJavaMigration() {
         val dataSource = SingleConnectionDataSource(context.connection, true)
         val jdbcTemplate = JdbcTemplate(dataSource)
 
-        jdbcTemplate.execute("""
+        jdbcTemplate.execute(
+            """
             CREATE TABLE IF NOT EXISTS public.tasks (
                 id UUID NOT NULL PRIMARY KEY,
                 user_id UUID NOT NULL,
@@ -27,6 +28,7 @@ class V2__CreateTaskEntity : BaseJavaMigration() {
             FOREIGN KEY (user_id)
             REFERENCES public.users(id)
             ON DELETE CASCADE;
-        """.trimIndent())
+            """.trimIndent()
+        )
     }
 }

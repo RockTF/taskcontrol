@@ -12,12 +12,12 @@ import java.util.*
 @Transactional
 class UserRepository(
     private val userJpaRepository: IUserJpaRepository
-): IUserRepository {
+) : IUserRepository {
     override fun save(user: User): User = UserMapper.toEntity(user)
         .let { userJpaRepository.save(it) }
         .let { UserMapper.toModel(it) }
 
     override fun deleteById(userId: UUID) = userJpaRepository.deleteById(userId)
 
-    override fun findAll(): List<User> = userJpaRepository.findAll().let( UserMapper::toModels )
+    override fun findAll(): List<User> = userJpaRepository.findAll().let(UserMapper::toModels)
 }

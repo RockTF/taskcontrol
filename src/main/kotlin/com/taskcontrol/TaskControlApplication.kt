@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class TaskControlApplication
 
 fun main(args: Array<String>) {
-	runApplication<TaskControlApplication>(*args)
+    runApplication<TaskControlApplication>(*args)
 }

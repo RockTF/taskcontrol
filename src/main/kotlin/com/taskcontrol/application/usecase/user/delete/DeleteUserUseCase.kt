@@ -7,6 +7,6 @@ import java.util.*
 @Service
 class DeleteUserUseCase(
     private val userRepository: IUserRepository
-): IDeleteUserUseCase {
+) : IDeleteUserUseCase {
     override fun deleteUser(userId: UUID) = userRepository.deleteById(userId)
 }

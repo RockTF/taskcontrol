@@ -7,6 +7,6 @@ import java.util.*
 @Service
 class DeleteTaskUseCase(
     private val taskRepository: TaskRepository
-): IDeleteTaskUseCase {
+) : IDeleteTaskUseCase {
     override fun deleteTask(taskId: UUID) = taskRepository.deleteById(taskId)
 }

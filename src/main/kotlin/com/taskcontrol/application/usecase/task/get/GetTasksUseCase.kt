@@ -1,8 +1,7 @@
 package com.taskcontrol.application.usecase.task.get
 
-import com.taskcontrol.api.mapper.TaskDtoMapper
+import com.taskcontrol.application.model.Status
 import com.taskcontrol.application.model.Task
-import com.taskcontrol.domain.TaskDto
 import com.taskcontrol.repository.TaskRepository
 import org.springframework.stereotype.Service
 import java.util.*
@@ -10,7 +9,11 @@ import java.util.*
 @Service
 class GetTasksUseCase(
     private val taskRepository: TaskRepository
-): IGetTasksUseCase {
+) : IGetTasksUseCase {
 
-    override fun getTasksByUser(userId: UUID): List<TaskDto> = taskRepository.findAllByUserId(userId).let ( TaskDtoMapper::toDtos )
+    override fun getTasksByUser(userId: UUID): List<Task> = taskRepository
+        .findAllByUserId(userId)
+
+    override fun getTasksByUserAndStatus(userId: UUID, status: Status): List<Task> = taskRepository
+        .findAllByUserIdAndStatus(userId, status)
 }

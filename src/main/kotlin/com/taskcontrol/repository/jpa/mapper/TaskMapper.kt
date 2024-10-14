@@ -1,8 +1,6 @@
 package com.taskcontrol.repository.jpa.mapper
 
 import com.taskcontrol.application.model.Task
-import com.taskcontrol.application.model.Priority
-import com.taskcontrol.application.model.Status
 import com.taskcontrol.repository.jpa.entity.TaskEntity
 import com.taskcontrol.repository.jpa.entity.UserEntity
 

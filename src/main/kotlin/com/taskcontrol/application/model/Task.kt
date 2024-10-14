@@ -3,7 +3,7 @@ package com.taskcontrol.application.model
 import java.time.LocalDateTime
 import java.util.UUID
 
-data class Task (
+data class Task(
     val id: UUID,
     val userId: UUID,
     val title: String,

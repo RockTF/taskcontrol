@@ -16,13 +16,15 @@ class SecurityConfig {
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http
             .csrf { csrf -> csrf.disable() }
-            .authorizeHttpRequests { authz -> authz
-                .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                .requestMatchers("/api/users/**").hasRole("USER")
-                .anyRequest().authenticated()
+            .authorizeHttpRequests { authz ->
+                authz
+                    .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                    .requestMatchers("/api/users/**").hasRole("USER")
+                    .anyRequest().authenticated()
             }
-            .sessionManagement { session -> session
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .sessionManagement { session ->
+                session
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             }
             .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter::class.java)
         return http.build()
@@ -33,4 +35,3 @@ class SecurityConfig {
         return JwtAuthenticationFilter()
     }
 }
-

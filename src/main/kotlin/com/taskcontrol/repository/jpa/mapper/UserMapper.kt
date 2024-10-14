@@ -1,7 +1,6 @@
 package com.taskcontrol.repository.jpa.mapper
 
 import com.taskcontrol.application.model.User
-import com.taskcontrol.application.model.Role
 import com.taskcontrol.repository.jpa.entity.UserEntity
 
 object UserMapper {

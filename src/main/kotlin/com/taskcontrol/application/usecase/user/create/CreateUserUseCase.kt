@@ -7,6 +7,6 @@ import org.springframework.stereotype.Service
 @Service
 class CreateUserUseCase(
     private val userRepository: IUserRepository
-): ICreateUserUseCase {
+) : ICreateUserUseCase {
     override fun registerUser(user: User): User = userRepository.save(user)
 }
