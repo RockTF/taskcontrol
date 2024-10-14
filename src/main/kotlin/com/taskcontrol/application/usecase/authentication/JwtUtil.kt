@@ -1,4 +1,4 @@
-package com.taskcontrol.config
+package com.taskcontrol.application.usecase.authentication
 
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts

@@ -22,7 +22,7 @@ class TaskEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    var id: UUID,
+    var id: UUID? = null,
 
     @Column(name = "title", nullable = false)
     var title: String,

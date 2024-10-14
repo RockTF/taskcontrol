@@ -1,13 +1,15 @@
-package com.taskcontrol.config
+package com.taskcontrol.application.usecase.authentication
 
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
 
+@Component
 class JwtRequestFilter(
     private val jwtUtil: JwtUtil,
     private val userDetailsService: MyUserDetailsService
@@ -28,7 +30,9 @@ class JwtRequestFilter(
             val userDetails = userDetailsService.loadUserByUsername(username)
             if (jwtUtil.validateToken(jwt!!, userDetails)) {
                 val usernamePasswordAuthenticationToken = UsernamePasswordAuthenticationToken(
-                    userDetails, null, userDetails.authorities
+                    userDetails,
+                    null,
+                    userDetails.authorities
                 )
                 usernamePasswordAuthenticationToken.details = WebAuthenticationDetailsSource().buildDetails(request)
                 SecurityContextHolder.getContext().authentication = usernamePasswordAuthenticationToken

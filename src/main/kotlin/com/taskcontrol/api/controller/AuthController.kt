@@ -1,9 +1,13 @@
-package com.taskcontrol.config
+package com.taskcontrol.api.controller
 
+import com.taskcontrol.application.usecase.authentication.JwtUtil
+import com.taskcontrol.application.usecase.authentication.MyUserDetailsService
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.userdetails.UserDetails
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class AuthController(
@@ -14,7 +18,6 @@ class AuthController(
 
     @PostMapping("/authenticate")
     fun createAuthenticationToken(@RequestBody authenticationRequest: AuthenticationRequest): AuthenticationResponse {
-
         val authenticationToken = UsernamePasswordAuthenticationToken(authenticationRequest.username, authenticationRequest.password)
         authenticationManager.authenticate(authenticationToken)
 

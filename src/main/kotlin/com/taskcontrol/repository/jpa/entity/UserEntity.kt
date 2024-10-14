@@ -17,7 +17,7 @@ class UserEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    var id: UUID,
+    var id: UUID? = null,
 
     @Column(name = "username", nullable = false, unique = true)
     var username: String,

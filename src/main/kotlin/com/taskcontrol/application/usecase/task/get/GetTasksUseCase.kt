@@ -16,4 +16,6 @@ class GetTasksUseCase(
 
     override fun getTasksByUserAndStatus(userId: UUID, status: Status): List<Task> = taskRepository
         .findAllByUserIdAndStatus(userId, status)
+
+    override fun findAllTasks(): List<Task> = taskRepository.findAll()
 }

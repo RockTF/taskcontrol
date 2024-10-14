@@ -4,6 +4,7 @@ import com.taskcontrol.api.mapper.UserDtoMapper
 import com.taskcontrol.application.usecase.user.create.ICreateUserUseCase
 import com.taskcontrol.application.usecase.user.delete.IDeleteUserUseCase
 import com.taskcontrol.domain.UserDto
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -16,13 +17,16 @@ import java.util.UUID
 @RequestMapping("/user")
 class UserController(
     private val createUserUseCase: ICreateUserUseCase,
-    private val deleteUserUseCase: IDeleteUserUseCase
-
+    private val deleteUserUseCase: IDeleteUserUseCase,
+    private val passwordEncoder: PasswordEncoder
 ) {
     @PostMapping("/register")
-    fun registerUser(@RequestBody user: UserDto): UserDto = UserDtoMapper.toModel(user)
-        .let { createUserUseCase.registerUser(it) }
-        .let { UserDtoMapper.toDto(it) }
+    fun registerUser(@RequestBody user: UserDto): UserDto {
+        val userModel = UserDtoMapper.toModel(user).copy(
+            password = passwordEncoder.encode(user.password)
+        )
+        return UserDtoMapper.toDto(createUserUseCase.registerUser(userModel))
+    }
 
     @DeleteMapping("/{userId}")
     fun deleteUser(@PathVariable userId: UUID) = deleteUserUseCase.deleteUser(userId)

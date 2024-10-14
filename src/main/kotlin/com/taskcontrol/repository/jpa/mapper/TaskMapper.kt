@@ -8,7 +8,7 @@ object TaskMapper {
     fun toModel(taskEntity: TaskEntity): Task {
         return Task(
             id = taskEntity.id,
-            userId = taskEntity.user.id,
+            userId = taskEntity.user.id!!,
             title = taskEntity.title,
             description = taskEntity.description ?: "",
             deadline = taskEntity.deadline,

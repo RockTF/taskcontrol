@@ -1,4 +1,4 @@
-package com.taskcontrol.config
+package com.taskcontrol.application.usecase.authentication
 
 import com.taskcontrol.application.port.IUserRepository
 import org.springframework.security.core.authority.SimpleGrantedAuthority

@@ -5,7 +5,7 @@ import java.time.LocalDateTime
 import java.util.UUID
 
 data class TaskDto(
-    val id: UUID,
+    val id: UUID?,
     val userId: UUID,
     val title: String,
     val description: String,

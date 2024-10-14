@@ -35,4 +35,8 @@ class TaskRepository(
     override fun findAllByUserIdAndStatus(userId: UUID, status: Status): List<Task> = taskJpaRepository
         .findAllByUserIdAndStatus(userId, status)
         .let(TaskMapper::toModels)
+
+    override fun countCompletedTasks(): Long = taskJpaRepository.countCompletedTasks()
+
+    override fun countIncompleteTasks(): Long = taskJpaRepository.countIncompleteTasks()
 }

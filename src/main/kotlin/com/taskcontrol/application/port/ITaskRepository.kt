@@ -10,4 +10,6 @@ interface ITaskRepository {
     fun deleteById(id: UUID)
     fun findAllByUserId(userId: UUID): List<Task>
     fun findAllByUserIdAndStatus(userId: UUID, status: Status): List<Task>
+    fun countCompletedTasks(): Long
+    fun countIncompleteTasks(): Long
 }
