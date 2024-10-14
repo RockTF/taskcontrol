@@ -20,4 +20,6 @@ class UserRepository(
     override fun deleteById(userId: UUID) = userJpaRepository.deleteById(userId)
 
     override fun findAll(): List<User> = userJpaRepository.findAll().let(UserMapper::toModels)
+
+    override fun findByUsername(username: String): User? = userJpaRepository.findByUsername(username)?.let(UserMapper::toModel)
 }

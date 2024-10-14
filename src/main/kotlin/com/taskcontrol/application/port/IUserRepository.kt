@@ -7,4 +7,5 @@ interface IUserRepository {
     fun save(user: User): User
     fun deleteById(userId: UUID)
     fun findAll(): List<User>
+    fun findByUsername(username: String): User?
 }
