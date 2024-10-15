@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service
 @Service
 class GetCurrentUser(
     private val userRepository: IUserRepository
-): IGetCurrentUser {
+) : IGetCurrentUser {
     override fun getCurrentUser(): User {
         val authentication = SecurityContextHolder.getContext().authentication as JwtAuthenticationToken
         val username = authentication.token.subject

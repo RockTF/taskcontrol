@@ -5,8 +5,8 @@ import com.taskcontrol.api.mapper.UserDtoMapper
 import com.taskcontrol.application.model.Role
 import com.taskcontrol.application.usecase.task.csv.IExportTaskStatisticsUseCase
 import com.taskcontrol.application.usecase.task.delete.IDeleteTaskUseCase
+import com.taskcontrol.application.usecase.task.get.IGetAllTasksUseCase
 import com.taskcontrol.application.usecase.task.get.IGetTaskStatisticsUseCase
-import com.taskcontrol.application.usecase.task.get.IGetTasksUseCase
 import com.taskcontrol.application.usecase.task.update.IUpdateTaskUseCase
 import com.taskcontrol.application.usecase.user.IChangeUserRoleUseCase
 import com.taskcontrol.application.usecase.user.delete.IDeleteUserUseCase
@@ -32,7 +32,7 @@ class AdminController(
     private val deleteUserUseCase: IDeleteUserUseCase,
     private val getUserUseCase: IGetUserUseCase,
     private val changeUserRoleUseCase: IChangeUserRoleUseCase,
-    private val getTasksUseCase: IGetTasksUseCase,
+    private val getAllTasksUseCase: IGetAllTasksUseCase,
     private val updateTaskUseCase: IUpdateTaskUseCase,
     private val deleteTaskUseCase: IDeleteTaskUseCase,
     private val getTaskStatisticsUseCase: IGetTaskStatisticsUseCase,
@@ -50,7 +50,7 @@ class AdminController(
     fun changeUserRole(@PathVariable userId: UUID, @RequestBody role: Role) = changeUserRoleUseCase.changeUserRole(userId, role)
 
     @GetMapping("/tasks")
-    fun getAllTasks(): List<TaskDto> = getTasksUseCase.findAllTasks()
+    fun getAllTasks(): List<TaskDto> = getAllTasksUseCase.findAllTasks()
         .map(TaskDtoMapper::toDto)
 
     @PutMapping("/tasks")

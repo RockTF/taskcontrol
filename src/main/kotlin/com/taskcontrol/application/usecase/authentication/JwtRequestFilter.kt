@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
 
 @Component
-class JwtRequestFilter: OncePerRequestFilter() {
+class JwtRequestFilter : OncePerRequestFilter() {
 
     @Autowired
     private lateinit var jwtUtil: JwtUtil
