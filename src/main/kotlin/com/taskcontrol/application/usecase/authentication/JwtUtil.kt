@@ -1,8 +1,8 @@
 package com.taskcontrol.application.usecase.authentication
 
+import com.taskcontrol.config.JwtConfig
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
-import io.jsonwebtoken.SignatureAlgorithm
 import io.jsonwebtoken.security.Keys
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Service
@@ -11,9 +11,9 @@ import java.util.Date
 import java.util.function.Function
 
 @Service
-class JwtUtil {
+class JwtUtil(jwtConfig: JwtConfig) {
 
-    private val SECRET_KEY: Key = Keys.secretKeyFor(SignatureAlgorithm.HS256)
+    private val SECRET_KEY: Key = Keys.hmacShaKeyFor(jwtConfig.secret.toByteArray())
 
     fun extractUsername(token: String): String {
         return extractClaim(token, Claims::getSubject)
