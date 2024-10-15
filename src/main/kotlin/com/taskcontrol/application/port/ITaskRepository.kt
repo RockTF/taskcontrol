@@ -13,4 +13,5 @@ interface ITaskRepository {
     fun findAllByUserIdAndStatus(userId: UUID, status: Status): List<Task>
     fun countCompletedTasks(): Long
     fun countIncompleteTasks(): Long
+    fun countTasksPerUser(): Map<UUID, Long>
 }

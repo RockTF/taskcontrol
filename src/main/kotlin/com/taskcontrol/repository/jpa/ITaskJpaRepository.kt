@@ -15,4 +15,7 @@ interface ITaskJpaRepository : JpaRepository<TaskEntity, UUID> {
 
     @Query("SELECT COUNT(t) FROM TaskEntity t WHERE t.status != 'COMPLETED'")
     fun countIncompleteTasks(): Long
+
+    @Query("SELECT t.user.id, COUNT(t) FROM TaskEntity t GROUP BY t.user.id")
+    fun countTasksPerUser(): List<Array<Any>>
 }

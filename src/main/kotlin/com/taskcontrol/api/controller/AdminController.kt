@@ -7,6 +7,7 @@ import com.taskcontrol.application.usecase.task.csv.IExportTaskStatisticsUseCase
 import com.taskcontrol.application.usecase.task.delete.IDeleteTaskUseCase
 import com.taskcontrol.application.usecase.task.get.IGetAllTasksUseCase
 import com.taskcontrol.application.usecase.task.get.IGetTaskStatisticsUseCase
+import com.taskcontrol.application.usecase.task.get.IGetUserTasksStatisticsUseCase
 import com.taskcontrol.application.usecase.task.update.IUpdateTaskUseCase
 import com.taskcontrol.application.usecase.user.IChangeUserRoleUseCase
 import com.taskcontrol.application.usecase.user.delete.IDeleteUserUseCase
@@ -37,7 +38,8 @@ class AdminController(
     private val deleteTaskUseCase: IDeleteTaskUseCase,
     private val getTaskStatisticsUseCase: IGetTaskStatisticsUseCase,
     private val getUserStatisticsUseCase: IGetUserStatisticsUseCase,
-    private val exportTaskStatisticsUseCase: IExportTaskStatisticsUseCase
+    private val exportTaskStatisticsUseCase: IExportTaskStatisticsUseCase,
+    private val getUserTasksStatisticsUseCase: IGetUserTasksStatisticsUseCase
 ) {
     @GetMapping("/users")
     fun getAllUsers(): List<UserDto> = getUserUseCase.getAllUsers()
@@ -46,7 +48,7 @@ class AdminController(
     @DeleteMapping("/users/{userId}")
     fun deleteUser(@PathVariable userId: UUID) = deleteUserUseCase.deleteUser(userId)
 
-    @PostMapping("/users/role/{userId}")
+    @PostMapping("/users/{userId}/role")
     fun changeUserRole(@PathVariable userId: UUID, @RequestBody role: Role) = changeUserRoleUseCase.changeUserRole(userId, role)
 
     @GetMapping("/tasks")
@@ -65,6 +67,9 @@ class AdminController(
     @GetMapping("/statistics/users")
     fun getUserStatistics() = getUserStatisticsUseCase.getUserStatistics()
 
-    @GetMapping("/export/tasks")
+    @GetMapping("/statistics/users/tasks")
+    fun getUserTasksStatistics() = getUserTasksStatisticsUseCase.getUserTasksStatistics()
+
+    @GetMapping("/tasks/export")
     fun exportTaskStatistics(): String = exportTaskStatisticsUseCase.exportTaskStatisticsToCSV()
 }

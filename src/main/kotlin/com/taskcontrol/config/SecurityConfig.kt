@@ -30,12 +30,12 @@ class SecurityConfig(
             .authorizeHttpRequests { authorizeRequests ->
                 authorizeRequests
                     .requestMatchers("/admin/**").hasRole("ADMIN")
-                    .requestMatchers("/user/**").permitAll() // Дозволити доступ до /user/**
-                    .requestMatchers("/task").hasAnyRole("USER", "ADMIN")
-                    .requestMatchers("/task/**").hasAnyRole("USER", "ADMIN")
-                    .requestMatchers("/auth/**").permitAll() // Дозволити доступ до /auth/**
-                    .requestMatchers("/authenticate").permitAll() // ensuring /authenticate endpoint is opened
-                    .requestMatchers("/register").permitAll() // ensuring /register endpoint is opened
+                    .requestMatchers("/user/**").permitAll()
+                    .requestMatchers("/task").permitAll()
+                    .requestMatchers("/task/**").permitAll()
+                    .requestMatchers("/auth/**").permitAll()
+                    .requestMatchers("/authenticate").permitAll()
+                    .requestMatchers("/register").permitAll()
                     .requestMatchers(
                         "/v3/api-docs/**",
                         "/swagger-ui/**",
