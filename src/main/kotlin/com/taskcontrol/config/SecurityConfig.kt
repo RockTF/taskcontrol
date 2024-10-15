@@ -29,6 +29,11 @@ class SecurityConfig(
                     .requestMatchers("/task/**").hasAnyRole("USER", "ADMIN")
                     .requestMatchers("/auth/**").permitAll() // Дозволити доступ до /auth/**
                     .requestMatchers("/authenticate").permitAll() // ensuring /authenticate endpoint is opened
+                    .requestMatchers(
+                        "/v3/api-docs/**",
+                        "/swagger-ui/**",
+                        "/swagger-ui.html"
+                    ).permitAll()
                     .anyRequest().authenticated()
             }
 

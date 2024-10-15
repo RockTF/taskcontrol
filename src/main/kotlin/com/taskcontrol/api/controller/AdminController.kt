@@ -13,9 +13,11 @@ import com.taskcontrol.application.usecase.user.get.IGetUserStatisticsUseCase
 import com.taskcontrol.application.usecase.user.get.IGetUserUseCase
 import com.taskcontrol.domain.TaskDto
 import com.taskcontrol.domain.UserDto
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.*
 import java.util.UUID
 
+@Tag(name = "Admin", description = "Admin API")
 @RestController
 @RequestMapping("/admin")
 class AdminController(

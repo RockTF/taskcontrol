@@ -5,6 +5,7 @@ import com.taskcontrol.application.model.Status
 import com.taskcontrol.application.usecase.task.create.ICreateTaskUseCase
 import com.taskcontrol.application.usecase.task.get.IGetTasksUseCase
 import com.taskcontrol.domain.TaskDto
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import java.util.UUID
 
+@Tag(name = "Tasks", description = "Task Management API")
 @RestController
 @RequestMapping("/tasks")
 class TaskController(
