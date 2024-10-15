@@ -22,6 +22,11 @@ class UserRepository(
 
     override fun findAll(): List<User> = userJpaRepository.findAll().let(UserMapper::toModels)
 
+    override fun findById(userId: UUID): User? {
+        return userJpaRepository.findById(userId)
+            .map(UserMapper::toModel)
+            .orElse(null)
+    }
     override fun findByUsername(username: String): User? = userJpaRepository.findByUsername(username)?.let(UserMapper::toModel)
 
     override fun changeUserRole(userId: UUID, role: Role) {

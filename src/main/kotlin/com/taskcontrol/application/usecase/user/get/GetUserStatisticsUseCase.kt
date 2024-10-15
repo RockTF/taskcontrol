@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 @Service
 class GetUserStatisticsUseCase(
     private val userRepository: IUserRepository
-): IGetUserStatisticsUseCase {
+) : IGetUserStatisticsUseCase {
     override fun getUserStatistics(): List<UserTaskCountDto> {
         TODO("Not yet implemented")
     }

@@ -8,6 +8,6 @@ import java.util.UUID
 @Service
 class ChangeUserRoleUseCase(
     private val userRepository: IUserRepository
-): IChangeUserRoleUseCase {
+) : IChangeUserRoleUseCase {
     override fun changeUserRole(userId: UUID, role: Role) = userRepository.changeUserRole(userId, role)
 }

@@ -52,7 +52,7 @@ class SwaggerConfig {
     fun exportApi(): GroupedOpenApi {
         return GroupedOpenApi.builder()
             .group("export")
-            .pathsToMatch("/export/**")
+            .pathsToMatch("/admin/export/**")
             .build()
     }
 

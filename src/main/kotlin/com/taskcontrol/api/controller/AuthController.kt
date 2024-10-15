@@ -33,7 +33,6 @@ class AuthController(
         authenticationManager.authenticate(authenticationToken)
 
         val userDetails: UserDetails = userDetailsService.loadUserByUsername(authenticationRequest.username)
-
         val jwt: String = jwtUtil.generateToken(userDetails)
 
         return AuthenticationResponse(jwt)

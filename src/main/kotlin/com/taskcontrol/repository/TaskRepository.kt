@@ -27,6 +27,10 @@ class TaskRepository(
 
     override fun findAll(): List<Task> = taskJpaRepository.findAll().let(TaskMapper::toModels)
 
+    override fun findById(id: UUID): Task? = taskJpaRepository.findById(id)
+        .map { TaskMapper.toModel(it) }
+        .orElse(null)
+
     override fun deleteById(id: UUID) = taskJpaRepository.deleteById(id)
 
     override fun findAllByUserId(userId: UUID): List<Task> = taskJpaRepository.findAllByUserId(userId)

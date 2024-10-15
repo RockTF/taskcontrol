@@ -9,9 +9,10 @@ import java.util.UUID
 interface IUserJpaRepository : JpaRepository<UserEntity, UUID> {
     fun findByUsername(username: String): UserEntity?
 
-    @Query("SELECT new com.taskcontrol.domain.UserTaskCountDto(u.id, u.username, COUNT(t)) " +
+    @Query(
+        "SELECT new com.taskcontrol.domain.UserTaskCountDto(u.id, u.username, COUNT(t)) " +
             "FROM UserEntity u LEFT JOIN TaskEntity t ON u.id = t.user.id " +
-            "GROUP BY u.id, u.username")
+            "GROUP BY u.id, u.username"
+    )
     fun countTasksByUser(): List<UserTaskCountDto>
-
 }

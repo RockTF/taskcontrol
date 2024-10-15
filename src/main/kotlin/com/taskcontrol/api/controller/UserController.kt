@@ -12,7 +12,7 @@ import java.util.UUID
 @RestController
 @RequestMapping("/user")
 class UserController(
-    private val deleteUserUseCase: IDeleteUserUseCase,
+    private val deleteUserUseCase: IDeleteUserUseCase
 ) {
     @DeleteMapping("/{userId}")
     fun deleteUser(@PathVariable userId: UUID) = deleteUserUseCase.deleteUser(userId)

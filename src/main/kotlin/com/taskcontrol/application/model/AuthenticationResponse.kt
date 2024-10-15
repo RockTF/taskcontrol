@@ -1,5 +1,5 @@
 package com.taskcontrol.application.model
 
-data class AuthenticationResponse (
+data class AuthenticationResponse(
     val jwt: String
 )

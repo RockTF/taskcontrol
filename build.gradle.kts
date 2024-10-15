@@ -40,6 +40,7 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt-api:0.11.2")
     runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.2")
     runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.2")
+    implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
 
     // Flyway dependency
     implementation("org.flywaydb:flyway-core:9.8.1")
