@@ -13,7 +13,7 @@ import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
-import java.time.LocalDateTime
+import java.time.LocalDate
 import java.util.UUID
 
 @Entity
@@ -31,7 +31,7 @@ class TaskEntity(
     var description: String? = null,
 
     @Column(name = "deadline")
-    var deadline: LocalDateTime,
+    var deadline: LocalDate,
 
     @Column(name = "priority", nullable = false)
     @Enumerated(EnumType.STRING)

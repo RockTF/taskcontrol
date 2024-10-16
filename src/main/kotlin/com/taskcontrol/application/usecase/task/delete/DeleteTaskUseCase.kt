@@ -18,16 +18,10 @@ class DeleteTaskUseCase(
 
         val user = getCurrentUser.getCurrentUser()
 
-        when {
-            user.role == Role.ADMIN -> {
-                taskRepository.deleteById(taskId)
-            }
-            user.id == task.userId -> {
-                taskRepository.deleteById(taskId)
-            }
-            else -> {
-                throw IllegalAccessException("User is not allowed to delete this task")
-            }
+        if (user.role == Role.ADMIN || user.id == task.userId) {
+            taskRepository.deleteById(taskId)
+        } else {
+            throw IllegalAccessException("User is not allowed to delete this task")
         }
     }
 }

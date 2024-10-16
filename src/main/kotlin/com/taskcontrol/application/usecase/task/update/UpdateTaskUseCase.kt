@@ -18,16 +18,10 @@ class UpdateTaskUseCase(
 
         val user = getCurrentUser.getCurrentUser()
 
-        return when {
-            user.role == Role.ADMIN -> {
-                taskRepository.save(task)
-            }
-            user.id == existingTask.userId -> {
-                taskRepository.save(task)
-            }
-            else -> {
-                throw IllegalAccessException("User is not allowed to update this task")
-            }
+        return if (user.role == Role.ADMIN || user.id == existingTask.userId) {
+            taskRepository.save(task)
+        } else {
+            throw IllegalAccessException("User is not allowed to update this task")
         }
     }
 }
