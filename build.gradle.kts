@@ -35,6 +35,7 @@ dependencies {
 
     implementation("org.springframework.boot:spring-boot-starter-logging")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0")
+    testImplementation("io.mockk:mockk:1.12.0")
 
     // JWT dependencies
     implementation("io.jsonwebtoken:jjwt-api:0.11.2")

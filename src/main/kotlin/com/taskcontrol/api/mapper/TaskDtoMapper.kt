@@ -18,10 +18,6 @@ object TaskDtoMapper {
         )
     }
 
-    fun toDtos(tasks: List<Task>): List<TaskDto> {
-        return tasks.map { toDto(it) }
-    }
-
     fun toModel(taskDto: TaskDto): Task {
         return Task(
             id = taskDto.id,

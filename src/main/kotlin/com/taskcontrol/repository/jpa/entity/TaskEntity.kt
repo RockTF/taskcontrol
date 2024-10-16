@@ -18,7 +18,7 @@ import java.util.UUID
 
 @Entity
 @Table(name = "tasks", schema = "public")
-class TaskEntity(
+data class TaskEntity(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
