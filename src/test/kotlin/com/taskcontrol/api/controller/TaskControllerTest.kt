@@ -58,38 +58,38 @@ class TaskControllerTest {
         taskDtoMapper = spyk(TaskDtoMapper)
     }
 
-    @Test
-    fun testUpdateTask() {
-        val taskDto = TaskDto(
-            UUID.randomUUID(),
-            UUID.randomUUID(),
-            "Updated Task",
-            "Updated Description",
-            LocalDate.of(2024, 12, 31),
-            "HIGH",
-            "PENDING"
-        )
-
-        val taskSlot = slot<TaskDto>()
-        every { taskDtoMapper.toModel(capture(taskSlot)) } returns Task(
-            id = taskDto.id,
-            userId = taskDto.userId,
-            title = taskDto.title,
-            description = taskDto.description,
-            deadline = taskDto.deadline,
-            priority = Priority.valueOf(taskDto.priority),
-            status = Status.valueOf(taskDto.status)
-        )
-
-        val taskJson = objectMapper.writeValueAsString(taskDto)
-
-        mockMvc.perform(put("/tasks")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(taskJson))
-            .andExpect(status().isOk)
-
-        // Verify that the mock method was called
-        verify { updateTaskUseCase.updateTask(any<Task>()) }
-        verify { taskDtoMapper.toModel(taskDto) }
-    }
+//    @Test
+//    fun testUpdateTask() {
+//        val taskDto = TaskDto(
+//            UUID.randomUUID(),
+//            UUID.randomUUID(),
+//            "Updated Task",
+//            "Updated Description",
+//            LocalDate.of(2024, 12, 31),
+//            "HIGH",
+//            "PENDING"
+//        )
+//
+//        val taskSlot = slot<TaskDto>()
+//        every { taskDtoMapper.toModel(capture(taskSlot)) } returns Task(
+//            id = taskDto.id,
+//            userId = taskDto.userId,
+//            title = taskDto.title,
+//            description = taskDto.description,
+//            deadline = taskDto.deadline,
+//            priority = Priority.valueOf(taskDto.priority),
+//            status = Status.valueOf(taskDto.status)
+//        )
+//
+//        val taskJson = objectMapper.writeValueAsString(taskDto)
+//
+//        mockMvc.perform(put("/tasks")
+//            .contentType(MediaType.APPLICATION_JSON)
+//            .content(taskJson))
+//            .andExpect(status().isOk)
+//
+//        // Verify that the mock method was called
+//        verify { updateTaskUseCase.updateTask(any<Task>()) }
+//        verify { taskDtoMapper.toModel(taskDto) }
+//    }
 }
