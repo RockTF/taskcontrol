@@ -37,33 +37,39 @@ class TaskController(
     private val changeTaskStatusUseCase: IChangeTaskStatusUseCase
 ) {
     @Operation(summary = "Create a new task", description = "Creates a new task based on the provided TaskDto.")
-    @ApiResponses(value = [
-        ApiResponse(responseCode = "200", description = "Task successfully created"),
-        ApiResponse(responseCode = "400", description = "Invalid input"),
-        ApiResponse(responseCode = "401", description = "Unauthorized")
-    ])
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "200", description = "Task successfully created"),
+            ApiResponse(responseCode = "400", description = "Invalid input"),
+            ApiResponse(responseCode = "401", description = "Unauthorized")
+        ]
+    )
     @PostMapping
     fun createTask(@RequestBody task: TaskDto): TaskDto = TaskDtoMapper.toModel(task)
         .let { createTaskUseCase.createTask(it) }
         .let { TaskDtoMapper.toDto(it) }
 
     @Operation(summary = "Get tasks by user ID", description = "Returns a list of tasks assigned to the user.")
-    @ApiResponses(value = [
-        ApiResponse(responseCode = "200", description = "List of tasks returned"),
-        ApiResponse(responseCode = "404", description = "User not found"),
-        ApiResponse(responseCode = "401", description = "Unauthorized")
-    ])
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "200", description = "List of tasks returned"),
+            ApiResponse(responseCode = "404", description = "User not found"),
+            ApiResponse(responseCode = "401", description = "Unauthorized")
+        ]
+    )
     @GetMapping("/{userId}")
     fun getTasksByUser(@PathVariable userId: UUID): List<TaskDto> = getTasksUseCase.getTasksByUser(userId)
         .let { it.map { task -> TaskDtoMapper.toDto(task) } }
 
     @Operation(summary = "Get tasks by user ID and status", description = "Returns a list of tasks assigned to the user with the specified status.")
-    @ApiResponses(value = [
-        ApiResponse(responseCode = "200", description = "List of tasks with specified status returned"),
-        ApiResponse(responseCode = "404", description = "User not found"),
-        ApiResponse(responseCode = "403", description = "Forbidden"),
-        ApiResponse(responseCode = "401", description = "Unauthorized")
-    ])
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "200", description = "List of tasks with specified status returned"),
+            ApiResponse(responseCode = "404", description = "User not found"),
+            ApiResponse(responseCode = "403", description = "Forbidden"),
+            ApiResponse(responseCode = "401", description = "Unauthorized")
+        ]
+    )
     @GetMapping("/{userId}/status")
     fun getTasksByUserAndStatus(@PathVariable userId: UUID, @RequestParam status: String): List<TaskDto> {
         val statusEnum = Status.valueOf(status.uppercase())
@@ -72,35 +78,41 @@ class TaskController(
     }
 
     @Operation(summary = "Update an existing task", description = "Updates the details of an existing task based on the provided TaskDto.")
-    @ApiResponses(value = [
-        ApiResponse(responseCode = "200", description = "Task successfully updated"),
-        ApiResponse(responseCode = "400", description = "Invalid input"),
-        ApiResponse(responseCode = "403", description = "Forbidden"),
-        ApiResponse(responseCode = "401", description = "Unauthorized")
-    ])
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "200", description = "Task successfully updated"),
+            ApiResponse(responseCode = "400", description = "Invalid input"),
+            ApiResponse(responseCode = "403", description = "Forbidden"),
+            ApiResponse(responseCode = "401", description = "Unauthorized")
+        ]
+    )
     @PutMapping
     fun updateTask(@RequestBody task: TaskDto): TaskDto = TaskDtoMapper.toModel(task)
         .let { updateTaskUseCase.updateTask(it) }
         .let { TaskDtoMapper.toDto(it) }
 
     @Operation(summary = "Delete a task", description = "Deletes the task with the specified ID.")
-    @ApiResponses(value = [
-        ApiResponse(responseCode = "204", description = "Task successfully deleted"),
-        ApiResponse(responseCode = "404", description = "Task not found"),
-        ApiResponse(responseCode = "403", description = "Forbidden")
-    ])
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "204", description = "Task successfully deleted"),
+            ApiResponse(responseCode = "404", description = "Task not found"),
+            ApiResponse(responseCode = "403", description = "Forbidden")
+        ]
+    )
     @DeleteMapping("/{taskId}")
     fun deleteTask(@PathVariable taskId: UUID) {
         deleteTaskUseCase.deleteTask(taskId)
     }
 
     @Operation(summary = "Change task status to done", description = "Changes the status of the task with the specified ID to 'DONE'.")
-    @ApiResponses(value = [
-        ApiResponse(responseCode = "200", description = "Task status successfully changed to 'DONE'"),
-        ApiResponse(responseCode = "404", description = "Task not found"),
-        ApiResponse(responseCode = "403", description = "Forbidden"),
-        ApiResponse(responseCode = "401", description = "Unauthorized")
-    ])
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "200", description = "Task status successfully changed to 'DONE'"),
+            ApiResponse(responseCode = "404", description = "Task not found"),
+            ApiResponse(responseCode = "403", description = "Forbidden"),
+            ApiResponse(responseCode = "401", description = "Unauthorized")
+        ]
+    )
     @PatchMapping("/{taskId}/status")
     fun changeTaskStatusToDone(@PathVariable taskId: UUID): TaskDto {
         return changeTaskStatusUseCase.changeTaskStatusToDone(taskId)

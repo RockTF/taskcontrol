@@ -8,9 +8,9 @@ import com.taskcontrol.application.usecase.authentication.MyUserDetailsService
 import com.taskcontrol.application.usecase.user.create.ICreateUserUseCase
 import com.taskcontrol.domain.UserDto
 import io.swagger.v3.oas.annotations.Operation
-import io.swagger.v3.oas.annotations.tags.Tag
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
+import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.userdetails.UserDetails
@@ -30,11 +30,13 @@ class AuthController(
 ) {
 
     @Operation(summary = "Create authentication token", description = "Authenticates the user and returns a JWT token.")
-    @ApiResponses(value = [
-        ApiResponse(responseCode = "200", description = "Authenticated successfully"),
-        ApiResponse(responseCode = "403", description = "Forbidden"),
-        ApiResponse(responseCode = "401", description = "Unauthorized")
-    ])
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "200", description = "Authenticated successfully"),
+            ApiResponse(responseCode = "403", description = "Forbidden"),
+            ApiResponse(responseCode = "401", description = "Unauthorized")
+        ]
+    )
     @PostMapping("/authenticate")
     fun createAuthenticationToken(@RequestBody authenticationRequest: AuthenticationRequest): AuthenticationResponse {
         val authenticationToken = UsernamePasswordAuthenticationToken(authenticationRequest.username, authenticationRequest.password)
@@ -47,11 +49,13 @@ class AuthController(
     }
 
     @Operation(summary = "Register a new user", description = "Registers a new user and returns the created user.")
-    @ApiResponses(value = [
-        ApiResponse(responseCode = "201", description = "User registered successfully"),
-        ApiResponse(responseCode = "403", description = "Forbidden"),
-        ApiResponse(responseCode = "400", description = "Invalid input")
-    ])
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "201", description = "User registered successfully"),
+            ApiResponse(responseCode = "403", description = "Forbidden"),
+            ApiResponse(responseCode = "400", description = "Invalid input")
+        ]
+    )
     @PostMapping("/register")
     fun registerUser(@RequestBody user: UserDto): UserDto {
         val userModel = UserDtoMapper.toModel(user).copy(

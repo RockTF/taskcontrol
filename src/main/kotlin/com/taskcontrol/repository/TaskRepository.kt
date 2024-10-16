@@ -45,5 +45,5 @@ class TaskRepository(
     override fun countIncompleteTasks(): Long = taskJpaRepository.countIncompleteTasks()
 
     override fun countTasksPerUser(): Map<UUID, Long> = taskJpaRepository.countTasksPerUser()
-            .associate { (userId, count) -> UUID.fromString(userId.toString()) to (count as Long) }
+        .associate { (userId, count) -> UUID.fromString(userId.toString()) to (count as Long) }
 }
